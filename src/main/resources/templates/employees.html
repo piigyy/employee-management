@@ -2,54 +2,18 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Student Management System</title>
+    <title>Employee Management System</title>
     <link th:replace="fragments/head"/>
+    <script src="https://kit.fontawesome.com/784ba7a609.js" crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
 </head>
 <body>
     <div th:replace="fragments/navbar"></div>
 
     <div class="container">
-
-        <form th:action="@{/employees}" th:method="GET">
-            <div class="row align-item-end mt-3">
-                <div class="col-3">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="input-name-search">Name</span>
-                        <input type="text" class="form-control" th:name="search-name" th:value="${searchName}"
-                               aria-label="Employee Name Input Search"
-                               aria-describedby="input-name-search">
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="input-salary-search">Salary</span>
-                        <input type="number" class="form-control" th:name="search-salary" th:value="${searchSalary}"
-                               aria-label="Employee Salary Search"
-                               aria-describedby="input-salary-search">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="input-date-search">Date</span>
-                        <input type="date" class="form-control" th:name="search-date" th:value="${searchDate}"
-                               aria-label="Employee Date Search"
-                               aria-describedby="input-date-search">
-                    </div>
-                </div>
-                <div class="col-1">
-                    <label for="sort-name" class="form-label">Sort Annual Salary</label>
-                </div>
-                <div class="col-1">
-                    <select class="form-select" aria-label="Sort By Age" id="sort-name" th:name="sort-salary">
-                        <option th:selected="${sortSalary == 'ASC'}" value="ASC">ASC</option>
-                        <option th:selected="${sortSalary == 'DESC'}" value="DESC">DESC</option>
-                    </select>
-                </div>
-                <div class="col-2">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-            </div>
-        </form>
 
         <div class="row">
             <div th:if="${message}" class="alert alert-primary mt-2" role="alert">
@@ -61,17 +25,59 @@
         </div>
 
         <div class="row">
+            <form th:action="@{/employees}" th:method="GET">
             <table class="table table-bordered mt-2">
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Salary</th>
                     <th scope="col">Date</th>
+                    <th scope="col">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-7">Salary</div>
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Sort By Age" id="sort-name" th:name="sort-salary" onchange="this.form.submit()">
+                                        <option th:selected="${sortSalary == 'ASC'}" value="ASC">ASC</option>
+                                        <option th:selected="${sortSalary == 'DESC'}" value="DESC">DESC</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+<!--                    <form th:action="@{/employees}" th:method="GET">-->
+                        <td></td>
+                        <td>
+                            <input type="text" class="form-control" th:name="search-name" th:value="${searchName}"
+                                   aria-label="Employee Name Input Search"
+                                   aria-describedby="input-name-search">
+                        </td>
+                        <td>
+                            <input type="date" class="form-control" th:name="search-date" th:value="${searchDate}"
+                                   aria-label="Employee Date Search"
+                                   aria-describedby="input-date-search">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" th:name="search-salary" th:value="${searchSalary}"
+                                   aria-label="Employee Salary Search"
+                                   aria-describedby="input-salary-search">
+                        </td>
+                        <td>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+<!--                    </form>-->
+                </tr>
                 <tr th:if="${employees.isEmpty()}">
                     <td colspan="5">
                         <h3 style="text-align: center">No Employee Data Found</h3>
@@ -159,6 +165,7 @@
                 </th:block>
                 </tbody>
             </table>
+            </form>
         </div>
     </div>
 
