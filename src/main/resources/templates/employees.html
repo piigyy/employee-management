@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <title>Employee Management System</title>
     <link th:replace="fragments/head"/>
-    <script src="https://kit.fontawesome.com/784ba7a609.js" crossorigin="anonymous"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-            crossorigin="anonymous"></script>
 </head>
 <body>
     <div th:replace="fragments/navbar"></div>
@@ -50,33 +45,31 @@
                 </thead>
                 <tbody>
                 <tr>
-<!--                    <form th:action="@{/employees}" th:method="GET">-->
-                        <td></td>
-                        <td>
-                            <input type="text" class="form-control" th:name="search-name" th:value="${searchName}"
-                                   aria-label="Employee Name Input Search"
-                                   aria-describedby="input-name-search">
-                        </td>
-                        <td>
-                            <input type="date" class="form-control" th:name="search-date" th:value="${searchDate}"
-                                   aria-label="Employee Date Search"
-                                   aria-describedby="input-date-search">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" th:name="search-salary" th:value="${searchSalary}"
-                                   aria-label="Employee Salary Search"
-                                   aria-describedby="input-salary-search">
-                        </td>
-                        <td>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                    </div>
+                    <td></td>
+                    <td>
+                        <input type="text" class="form-control" th:name="search-name" th:value="${searchName}"
+                               aria-label="Employee Name Input Search"
+                               aria-describedby="input-name-search">
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" th:name="search-date" th:value="${searchDate}"
+                               aria-label="Employee Date Search"
+                               aria-describedby="input-date-search">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" th:name="search-salary" th:value="${searchSalary}"
+                               aria-label="Employee Salary Search"
+                               aria-describedby="input-salary-search">
+                    </td>
+                    <td>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary">Search</button>
                                 </div>
                             </div>
-                        </td>
-<!--                    </form>-->
+                        </div>
+                    </td>
                 </tr>
                 <tr th:if="${employees.isEmpty()}">
                     <td colspan="5">
@@ -93,10 +86,10 @@
                             <div class="container">
                                 <div class="row align-item-center">
                                     <div class="col-2">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:attrappend="data-bs-target='#exampleModal'+${employee.id}">
                                             Edit
                                         </button>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" th:id="'exampleModal' + ${employee.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
